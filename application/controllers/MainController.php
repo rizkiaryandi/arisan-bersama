@@ -51,6 +51,56 @@ class MainController extends CI_Controller {
             'data' => $data
 		]);
 	}
+
+	public function participant($unique_id){
+		$ars = $this->db
+				->select('arisan.*, users.name, users.tel')
+				->from('users')
+				->join('arisan', 'arisan.user_id = users.id')
+				->where('arisan.unique_id', $unique_id)
+				->get();
+		
+		if($ars->num_rows() != 1){
+			$this->session->set_flashdata('res', [
+				'met'=>'warning',
+				'mess'=>'<b>ID Salah</b>, Arisan yang anda maksud tidak ditemukan'
+			]);
+			redirect('followed-arisan');
+		}
+
+		$data['art'] = $ars->row();
+		$trk = $this->db
+					->select('order_participant.*, users.name, users.tel')
+					->from('users')
+					->join('order_participant', 'order_participant.user_id = users.id')
+					->where('order_participant.arisan_id', $ars->row()->id)
+					->order_by('order_participant.number', 'asc')->get();
+		$data['participant'] = $trk->result();
+		$data['numpa'] = true;
+		if($trk->num_rows() > 0){
+			if($trk->result()[0]->number > 0) $data['numpa'] = false;
+		}
+		$this->load->view('dashboardTemp', [
+			'title' => 'Anggota Arisan',
+			'page' => 'dashboard/participant/index',
+            'data' => $data
+		]);
+	}
+
+	public function followedArisan(){
+		$data['arisan'] = $this->db
+						->select('arisan.*, order_participant.status, order_participant.number')
+						->from('order_participant')
+						->join('arisan', 'arisan.id = order_participant.arisan_id')
+						->where('order_participant.user_id', $this->usr['id'])
+						->order_by('order_participant.created_at', 'desc')
+						->get()->result();
+		$this->load->view('dashboardTemp', [
+			'title' => 'Arisan',
+			'page' => 'dashboard/arisan/followed',
+            'data' => $data
+		]);
+	}
 	
     public function addArisan(){
 		$this->load->view('dashboardTemp', [

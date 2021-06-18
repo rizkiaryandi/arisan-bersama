@@ -3,10 +3,9 @@
         <div class="row">
             <div class="col-12">
                 <h3>
-                    Manage Arisan
+                    Arisan yang Anda Ikuti
                 </h3>
-                <a href="<?php echo base_url('add-arisan')?>" class="btn btn-primary">Tambah Arisan</a>
-                <a href="<?php echo base_url('followed-arisan')?>" class="btn btn-success">Arisan yang anda ikuti</a>
+                <a href="<?php echo base_url('join')?>" class="btn btn-primary">Join Arisan</a>
             </div>
         </div>
         <div class="row pt-3">
@@ -15,11 +14,10 @@
                     <thead>
                         <tr>
                             <th scope="col">No</th>
-                            <th scope="col">Aksi/ID Unik</th>
+                            <th scope="col">Aksi</th>
                             <th scope="col">Judul Arisan</th>
                             <th scope="col">Deskripsi</th>
-                            <th scope="col">Tanggal Mulai</th>
-                            <th scope="col">Periode/Lama</th>
+                            <th scope="col">Status</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -32,27 +30,27 @@
                                 </td>
                                 <td>  
                                     <div class="btn-group" role="group" aria-label="Button group">
-                                        <button onclick="bagikan('<?=$ar->unique_id?>')" data-toggle="modal" data-target="#exampleModal" class="btn btn-primary p-2">
-                                            <i class="ti ti-share"></i>
-                                        </button>
-                                        <a href="<?=base_url('edit-arisan?id='.$ar->id)?>" class="btn btn-success p-2">
-                                            <i class="ti ti-slice"></i>
-                                        </a>
-                                        <button onClick="dele(<?=$ar->id?>)" class="btn btn-danger p-2">
-                                            <i class="ti ti-trash"></i>
-                                        </button>
+                                        <a href="#" class="btn btn-primary p-2"><i class="ti ti-bag"></i> Pembayaran</a>
+                                        <a href="#" class="btn btn-outline-success p-2"><i class="ti ti-user"></i></a>
                                     </div>
                                 </td>
                                 <td>
-                                    <p><?=$ar->title?></p>
+                                    <p class="font-weight-bold text-primary h5"><?=$ar->title?></p>
                                     <p>(<?=$this->apl->price($ar->nominal)?>)</p>
+                                    <p><?=$ar->period?> / <?=$ar->long_time?>x</p>
+                                    <p><b>Mulai:</b> <?=$ar->time_start?></p>
+                                    <p><b>Urutan:</b> <?php
+                                        if($ar->number == 0) echo "Belum ditentukan";
+                                        else $ar->number;
+                                    ?></p>
                                     <a href="<?=base_url('participant-list/').$ar->unique_id?>" class="btn btn-success btn-sm btn-block p-2">Lihat Anggota</a>
                                 </td>
-                                <td><?=$ar->description?></td>
                                 <td>
-                                    <p><?=$ar->time_start?></p>
+                                    <?=$ar->description?>
                                 </td>
-                                <td><?=$ar->period?> / <?=$ar->long_time?>x</td>
+                                <td>
+                                    <?=$ar->status?>
+                                </td>
                             </tr>
                         <?php $no++; endforeach; ?>
                     </tbody>

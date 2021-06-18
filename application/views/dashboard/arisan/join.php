@@ -5,7 +5,7 @@
         </h3>
         <div class="row">
             <div class="col-md-4">
-                <form action="<?=base_url('action')?>" method="post">
+                <form action="<?=base_url('action/join')?>" method="post">
                     <?=$this->apl->csrf()?>
                     <div class="form-group">
                         <label for="unique_id">ID Arisan</label>

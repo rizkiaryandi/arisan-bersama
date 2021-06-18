@@ -51,9 +51,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $route['default_controller'] = 'mainController/index';
 $route['dashboard']['get'] = 'mainController/dashboard';
-$route['join/(:any)'] = 'mainController/join/$1';
 
-
+$route['participant-list/(:any)']['get'] = 'mainController/participant/$1';
+$route['join']['get']  = 'mainController/join';
+$route['join/(:any)']['get']  = 'mainController/join/$1';
+$route['action/join']['post']  = 'crud/participantController/add';
+$route['confirm/(:any)']['get'] = 'crud/participantController/status/belum_menang/$1';
+$route['menang/(:any)']['get'] = 'crud/participantController/status/sudah_menang/$1';
+$route['batal/(:any)']['get'] = 'crud/participantController/status/belum_menang/$1';
+$route['tolak/(:any)']['get'] = 'crud/participantController/status/tolak/$1';
+$route['shake/(:any)']['get'] = 'crud/participantController/shake/$1';
 
 $route['login']['get'] = 'authController/login';
 $route['action/login']['post'] = 'authController/loginAction';
@@ -65,6 +72,7 @@ $route['personal']['get'] = 'mainController/personal';
 $route['action/edit-personal']['post'] = 'crud/personalController/edit';
 
 $route['arisan-list']['get'] = 'mainController/arisan';
+$route['followed-arisan']['get'] = 'mainController/followedArisan';
 $route['add-arisan']['get'] = 'mainController/addArisan';
 $route['edit-arisan']['get'] = 'mainController/editArisan';
 $route['action/add-arisan']['post'] = 'crud/arisanController/add';

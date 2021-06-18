@@ -99,7 +99,13 @@
           <li class="nav-item" id="tab-3">
             <a class="nav-link" href="<?=base_url('transaction-list')?>">
               <i class="ti-archive menu-icon"></i>
-              <span class="menu-title">List Transaksi</span>
+              <span class="menu-title">List Pembayaran</span>
+            </a>
+          </li>
+          <li class="nav-item" id="tab-3">
+            <a class="nav-link" href="<?=base_url('join')?>">
+              <i class="ti-shift-right menu-icon"></i>
+              <span class="menu-title">Join Arisan</span>
             </a>
           </li>
         </ul>
