@@ -47,6 +47,7 @@
                                     <p><?=$ar->title?></p>
                                     <p>(<?=$this->apl->price($ar->nominal)?>)</p>
                                     <a href="<?=base_url('participant-list/').$ar->unique_id?>" class="btn btn-success btn-sm btn-block p-2">Lihat Anggota</a>
+                                    <a href="<?=base_url('manage-transaction/').$ar->unique_id?>" class="btn btn-primary btn-sm btn-block p-2">Manage Transaksi</a>
                                 </td>
                                 <td><?=$ar->description?></td>
                                 <td>

@@ -126,10 +126,28 @@ class MainController extends CI_Controller {
 
 	
     public function transaction(){
-		$data['ars'] = $this->db->where('id', $this->usr['id'])->get('arisan')->result();
+		$data['transaction'] = $this->db
+								->select('transaction.id, arisan.title, arisan.unique_id, arisan.nominal')
+								->from('arisan')
+								->join('transaction', 'transaction.arisan_id = arisan.id')
+								->where('transaction.user_id', $this->usr['id'])->get()->result();
 		$this->load->view('dashboardTemp', [
 			'title' => 'List Pembayaran',
 			'page' => 'dashboard/transaction/index',
+            'data' => $data
+		]);
+	}
+
+	public function addTransaction(){
+		$data['arisanJoin'] = $this->db
+								->select('order_participant.id, arisan.title, arisan.unique_id, arisan.nominal')
+								->from('arisan')
+								->join('order_participant', 'order_participant.arisan_id = arisan.id')
+								->where('order_participant.user_id', $this->usr['id'])
+								->where('order_participant.status != "belum_terkonfirmasi"')->get()->result();
+		$this->load->view('dashboardTemp', [
+			'title' => 'Tambah Pembayaran',
+			'page' => 'dashboard/transaction/add',
             'data' => $data
 		]);
 	}
