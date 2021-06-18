@@ -51,6 +51,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $route['default_controller'] = 'mainController/index';
 $route['dashboard']['get'] = 'mainController/dashboard';
+$route['join/(:any)'] = 'mainController/join/$1';
 
 
 
@@ -63,6 +64,15 @@ $route['logout']['get'] = 'authController/logout';
 $route['personal']['get'] = 'mainController/personal';
 $route['action/edit-personal']['post'] = 'crud/personalController/edit';
 
+$route['arisan-list']['get'] = 'mainController/arisan';
+$route['add-arisan']['get'] = 'mainController/addArisan';
+$route['edit-arisan']['get'] = 'mainController/editArisan';
+$route['action/add-arisan']['post'] = 'crud/arisanController/add';
+$route['action/edit-arisan']['post'] = 'crud/arisanController/edit';
+$route['action/delete-arisan']['get'] = 'crud/arisanController/delete';
+
+
+$route['transaction-list']['get'] = 'mainController/transaction';
 
 $route['mainController/(:any)'] = "error404";
 $route['authController/(:any)'] = "error404";

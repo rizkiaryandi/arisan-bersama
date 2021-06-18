@@ -42,4 +42,56 @@ class MainController extends CI_Controller {
             'data' => $data
 		]);
 	}
+	
+    public function arisan(){
+		$data['arisan'] = $this->db->where('user_id', $this->usr['id'])->order_by('created_at', 'desc')->get('arisan')->result();
+		$this->load->view('dashboardTemp', [
+			'title' => 'Arisan',
+			'page' => 'dashboard/arisan/index',
+            'data' => $data
+		]);
+	}
+	
+    public function addArisan(){
+		$this->load->view('dashboardTemp', [
+			'title' => 'Tambah Arisan',
+			'page' => 'dashboard/arisan/add',
+            'data' => []
+		]);
+	}
+
+	
+    public function editArisan(){
+
+		$data['ar'] = $this->db->get_where('arisan',[
+			'id' => $this->input->get('id'),
+			'user_id' => $this->usr['id']
+		])->row();
+		$this->load->view('dashboardTemp', [
+			'title' => 'Edit Arisan',
+			'page' => 'dashboard/arisan/edit',
+            'data' => $data
+		]);
+	}
+
+	
+    public function transaction(){
+		$data['ars'] = $this->db->where('id', $this->usr['id'])->get('arisan')->result();
+		$this->load->view('dashboardTemp', [
+			'title' => 'List Pembayaran',
+			'page' => 'dashboard/transaction/index',
+            'data' => $data
+		]);
+	}
+
+
+	public function join($i = ""){
+		$data['ars'] = $this->db->where('unique_id', $i)->get('arisan')->row();
+		$data['arsid'] = $i;
+		$this->load->view('dashboardTemp', [
+			'title' => 'Join Arisan',
+			'page' => 'dashboard/arisan/join',
+            'data' => $data
+		]);
+	}
 }

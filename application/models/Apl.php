@@ -39,7 +39,7 @@ class Apl extends CI_Model {
  
         if(is_numeric($a)) {
             $fr = 'Rp ' . number_format($a, '2', ',', '.');
-            return $fr;
+            return explode(',', $fr)[0];
         }
         else {
             return "";

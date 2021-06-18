@@ -90,14 +90,14 @@
               <span class="menu-title">Dashboard</span>
             </a>
           </li>
-          <li class="nav-item" id="tab-1">
-            <a class="nav-link" href="<?=base_url('arisan')?>">
+          <li class="nav-item" id="tab-2">
+            <a class="nav-link" href="<?=base_url('arisan-list')?>">
               <i class="ti-briefcase menu-icon"></i>
               <span class="menu-title">List Arisan</span>
             </a>
           </li>
-          <li class="nav-item" id="tab-1">
-            <a class="nav-link" href="<?=base_url('transaction')?>">
+          <li class="nav-item" id="tab-3">
+            <a class="nav-link" href="<?=base_url('transaction-list')?>">
               <i class="ti-archive menu-icon"></i>
               <span class="menu-title">List Transaksi</span>
             </a>
