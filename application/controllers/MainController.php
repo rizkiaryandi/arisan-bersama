@@ -127,7 +127,7 @@ class MainController extends CI_Controller {
 	
     public function transaction(){
 		$data['transaction'] = $this->db
-								->select('transaction.id, arisan.title, arisan.unique_id, arisan.nominal')
+								->select('transaction.id, arisan.title, arisan.unique_id, arisan.nominal, transaction.status,  transaction.created_at')
 								->from('arisan')
 								->join('transaction', 'transaction.arisan_id = arisan.id')
 								->where('transaction.user_id', $this->usr['id'])->get()->result();
@@ -140,7 +140,7 @@ class MainController extends CI_Controller {
 
 	public function addTransaction(){
 		$data['arisanJoin'] = $this->db
-								->select('order_participant.id, arisan.title, arisan.unique_id, arisan.nominal')
+								->select('order_participant.id, arisan.id as ih, arisan.title, arisan.unique_id, arisan.nominal')
 								->from('arisan')
 								->join('order_participant', 'order_participant.arisan_id = arisan.id')
 								->where('order_participant.user_id', $this->usr['id'])

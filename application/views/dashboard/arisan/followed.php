@@ -30,8 +30,8 @@
                                 </td>
                                 <td>  
                                     <div class="btn-group" role="group" aria-label="Button group">
-                                        <a href="#" class="btn btn-primary p-2"><i class="ti ti-bag"></i> Pembayaran</a>
-                                        <a href="#" class="btn btn-outline-success p-2"><i class="ti ti-user"></i></a>
+                                        <a href="<?=base_url('add-transaction')?>" class="btn btn-primary p-2"><i class="ti ti-bag"></i> Pembayaran</a>
+                                        <a href="<?=base_url('participant-list/').$ar->unique_id?>" class="btn btn-outline-success p-2"><i class="ti ti-user"></i></a>
                                     </div>
                                 </td>
                                 <td>

@@ -30,19 +30,21 @@
                                     <?=$no?>
                                 </td>
                                 <td>  
-
+                                    <button onClick="dele(<?=$ar->id?>)" class="btn btn-danger p-2">
+                                        <i class="ti ti-trash"></i> Batalkan
+                                    </button>
                                 </td>
                                 <td>  
-
+                                    <?=$ar->title?>
                                 </td>
                                 <td>  
-
+                                    <?=$ar->nominal?>
                                 </td>
                                 <td>  
-
+                                    <?=$ar->status?>
                                 </td>
                                 <td>  
-
+                                    <?=$ar->created_at?>
                                 </td>
                             </tr>
                         <?php $no++; endforeach; ?>
@@ -96,7 +98,7 @@
     function dele(id){
         var r = confirm("Yakin menghapus data?");
         if(r == true){
-            window.location.href = "<?php echo base_url()?>action/delete-arisan?id="+id;
+            window.location.href = "<?php echo base_url()?>action/delete-transaction?id="+id;
         }
     }
 

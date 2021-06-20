@@ -82,6 +82,8 @@ $route['action/delete-arisan']['get'] = 'crud/arisanController/delete';
 
 $route['transaction-list']['get'] = 'mainController/transaction';
 $route['add-transaction']['get'] = 'mainController/addTransaction';
+$route['action/add-transaction']['post'] = 'crud/transactionController/add';
+$route['action/delete-transaction']['get'] = 'crud/transactionController/delete';
 
 $route['mainController/(:any)'] = "error404";
 $route['authController/(:any)'] = "error404";
