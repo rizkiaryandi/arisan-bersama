@@ -60,9 +60,13 @@
 
                                     <?php if($ar->status == 'sudah_menang'):?>
                                         <p><b>Status: </b> Sudang Menang </p>
-                                        <?php if($usr['id'] == $art->user_id):?>
+                                        <?php if($usr['id'] == $art->user_id && !$ar->img):?>
                                             <a href="<?php echo base_url('batal/'.$ar->id)?>" class="btn btn-sm btn-danger p-2">Batal</a>
                                             <a href="<?php echo base_url('upload/'.$ar->id)?>" class="btn btn-sm btn-primary p-2">Upload Dokumentasi</a>
+                                            <?php else:?>
+                                                <a href="<?=base_url('images/documentation/'.$ar->img)?>" class="btn">
+                                                    <img src="<?=base_url('images/documentation/'.$ar->img)?>" alt="img">
+                                                </a>
                                         <?php endif?>
                                     <?php endif?>
                                 </td>

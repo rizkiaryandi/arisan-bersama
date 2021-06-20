@@ -162,4 +162,35 @@ class MainController extends CI_Controller {
             'data' => $data
 		]);
 	}
+
+	
+	public function upload_dokumentasi($id){
+		$data['id'] = $id;
+		$this->load->view('dashboardTemp', [
+			'title' => 'Upload Dokumentasi',
+			'page' => 'dashboard/participant/upload',
+            'data' => $data
+		]);
+	}
+
+
+	public function manageTransaction($uid){
+		$ra = $this->db->where('unique_id', $uid)->where('user_id', $this->usr['id'])->get('arisan');
+		if($ra->num_rows() == 0) redirect('arisan-list');
+		$id = $ra->row()->id;
+		$data['transaction'] = $this->db
+								->select('users.name, transaction.label, transaction.img, transaction.id, arisan.title, arisan.unique_id, arisan.nominal, transaction.status,  transaction.created_at')
+								->from('users')
+								->join('arisan', 'arisan.user_id = users.id')
+								->join('transaction', 'transaction.arisan_id = arisan.id')
+								->where('transaction.arisan_id', $id)
+								->order_by('transaction.status', 'ASC')
+								->order_by('transaction.created_at', 'DESC')
+								->get()->result();
+		$this->load->view('dashboardTemp', [
+			'title' => 'Manage Pembayaran',
+			'page' => 'dashboard/arisan/manage',
+            'data' => $data
+		]);
+	}
 }

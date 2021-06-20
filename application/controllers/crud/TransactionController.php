@@ -56,19 +56,18 @@ class TransactionController extends CI_Controller {
 		redirect('transaction-list', 'refresh');
     }
     
-    public function edit() {
+    public function edit($id) {
         try {
+			$ra = $this->db->where('id', $this->db->get_where('transaction',[
+				'id'=>$id
+			])->row()->arisan_id)->where('user_id', $this->usr['id'])->get('arisan');
+			if($ra->num_rows() == 0) redirect('arisan-list');
 
             $d = [
-				"title" => $this->input->post('title'),
-				"description" => $this->input->post('description'),
-				"time_start" => $this->input->post('time_start'),
-				"period" => $this->input->post('period'),
-				"nominal" => $this->input->post('nominal'),
-				"long_time" => $this->input->post('long_time')
+				"status" => "pembayaran_berhasil"
 			];
 
-			$store1 = $this->db->where('id', $this->input->post('id'))->where('user_id', $this->usr['id'])->update('arisan',$d);
+			$store1 = $this->db->where('id', $id)->update('transaction',$d);
 	
 			if($store1){
 				$this->session->set_flashdata('res',[
@@ -87,7 +86,7 @@ class TransactionController extends CI_Controller {
 				'mess'=>'Terjadi kesalahan saat mengedit data'
 			]);
 		}
-		redirect('arisan-list');
+		redirect('manage-transaction/'.$ra->row()->unique_id);
     }
     
     public function delete() {

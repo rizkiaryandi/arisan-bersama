@@ -182,6 +182,79 @@ class ParticipantController extends CI_Controller {
 		}
 		redirect('arisan-list');
     }
+
+	
+    public function upload() {
+        try {
+            $d['img'] = "";
+
+			$asd = $this->db->get_where('order_participant', [
+				'id' => $this->input->post('id')
+			]);
+
+			if($asd->num_rows() == 0 ){
+				$this->session->set_flashdata('res', [
+					'met'=>'danger',
+					'mess'=>'Anda tidak diizinkan'
+				]);
+				redirect('arisan-list');
+			}
+			$arid = $asd->row()->arisan_id;
+			
+            if($_FILES['img']['name']){
+				$this->load->library('upload');
+				$this->load->library('image_lib');
+
+				$config['upload_path'] = './images/documentation/'; //path folder
+				$config['allowed_types'] = 'gif|jpg|png|jpeg|bmp'; //type yang dapat diakses bisa anda sesuaikan
+				
+				$config['file_name'] = date($this->usr['id'].'Ymdhis');
+				$conf['image_library']='gd2';
+				$conf['maintain_ratio']= TRUE;
+				$conf['quality']= '75%';
+			
+				$this->upload->initialize($config);
+
+				if ( $this->upload->do_upload('img')){
+					$gbr = $this->upload->data();
+					$conf['width']= 1280;
+					$conf['source_image']='./images/documentation/'.$gbr['file_name'];
+					$conf['new_image']= './images/documentation/'.$gbr['file_name'];
+
+					$this->image_lib->initialize($conf);
+					$this->image_lib->resize();
+                    
+					$d['img'] = $gbr['file_name'];
+				}
+			}
+
+
+			$store1 = $this->db
+						->where('id', $this->input->post('id'))
+						->where('arisan_id', $arid)
+						->update('order_participant',$d);
+	
+			if($store1){
+				$this->session->set_flashdata('res',[
+					'met'=>'success',
+					'mess'=>'Berhasil mengedit data'
+				]);
+			} else{
+				$this->session->set_flashdata('res', [
+					'met'=>'danger',
+					'mess'=>'Terjadi kesalahan saat mengedit data'
+				]);
+			}
+		} catch (\Exception $th) {
+			$this->session->set_flashdata('res', [
+				'met'=>'danger',
+				'mess'=>'Terjadi kesalahan saat mengedit data'
+			]);
+		}
+		redirect('participant-list/'.$this->db->get_where('arisan', [
+			'id' => $asd->row()->arisan_id
+		])->row()->unique_id);
+    }
     
     public function delete() {
         try {

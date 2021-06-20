@@ -55,12 +55,14 @@ $route['dashboard']['get'] = 'mainController/dashboard';
 $route['participant-list/(:any)']['get'] = 'mainController/participant/$1';
 $route['join']['get']  = 'mainController/join';
 $route['join/(:any)']['get']  = 'mainController/join/$1';
+$route['upload/(:any)']['get']  = 'mainController/upload_dokumentasi/$1';
 $route['action/join']['post']  = 'crud/participantController/add';
 $route['confirm/(:any)']['get'] = 'crud/participantController/status/belum_menang/$1';
 $route['menang/(:any)']['get'] = 'crud/participantController/status/sudah_menang/$1';
 $route['batal/(:any)']['get'] = 'crud/participantController/status/belum_menang/$1';
 $route['tolak/(:any)']['get'] = 'crud/participantController/status/tolak/$1';
 $route['shake/(:any)']['get'] = 'crud/participantController/shake/$1';
+$route['action/upload']['post'] = 'crud/participantController/upload';
 
 $route['login']['get'] = 'authController/login';
 $route['action/login']['post'] = 'authController/loginAction';
@@ -72,6 +74,7 @@ $route['personal']['get'] = 'mainController/personal';
 $route['action/edit-personal']['post'] = 'crud/personalController/edit';
 
 $route['arisan-list']['get'] = 'mainController/arisan';
+$route['manage-transaction/(:any)']['get'] = 'mainController/manageTransaction/$1';
 $route['followed-arisan']['get'] = 'mainController/followedArisan';
 $route['add-arisan']['get'] = 'mainController/addArisan';
 $route['edit-arisan']['get'] = 'mainController/editArisan';
@@ -84,6 +87,7 @@ $route['transaction-list']['get'] = 'mainController/transaction';
 $route['add-transaction']['get'] = 'mainController/addTransaction';
 $route['action/add-transaction']['post'] = 'crud/transactionController/add';
 $route['action/delete-transaction']['get'] = 'crud/transactionController/delete';
+$route['konfirmasi_bayar/(:any)']['get'] = 'crud/transactionController/edit/$1';
 
 $route['mainController/(:any)'] = "error404";
 $route['authController/(:any)'] = "error404";
