@@ -9,6 +9,10 @@
                     <input required type="text" class="form-control" id="name" name="name" value="<?=$pr->name?>">
                 </div>
                 <div class="form-group">
+                    <label for="tel">No Whatsapp</label>
+                    <input required type="tel" class="form-control" id="tel" name="tel" value="<?=$pr->tel?>">
+                </div>
+                <div class="form-group">
                     <label for="username">Username</label>
                     <input required type="text" class="form-control" id="username" name="username" value="<?=$pr->username?>">
                 </div>

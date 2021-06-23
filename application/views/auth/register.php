@@ -26,6 +26,9 @@
                 <div class="form-group">
                     <input required min="1" max="100" type="text" name="name" class="form-control form-control-lg" id="username" placeholder="Nama" required>
                 </div>
+                <div class="form-group">
+                    <input required min="6" max="30" type="tel" name="tel" class="form-control form-control-lg" id="username" placeholder="No Whatsapp" required>
+                </div>
                 <div class="mt-3">
                     <button type="submit" class="btn btn-block btn-success btn-lg font-weight-medium auth-form-btn">
                         Selesaikan Pendaftaran

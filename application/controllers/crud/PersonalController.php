@@ -16,6 +16,7 @@ class PersonalController extends CI_Controller {
             $d = [
 				'name' => $this->input->post('name'),
 				'username' => $this->input->post('username'),
+				'tel' => $this->input->post('tel'),
 			];
 
             if($this->input->post('password') != ''){

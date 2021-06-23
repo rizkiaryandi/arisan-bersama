@@ -43,6 +43,7 @@ class AuthController extends CI_Controller {
                     'name' => $userData->name,
                     'username' => $userData->username,
                     'level' => $userData->role,
+                    'tel' => $userData->tel,
                     'timeout' => date('YMdHis')
                 ]);
                 $this->session->set_userdata('status', 'first');
@@ -74,11 +75,13 @@ class AuthController extends CI_Controller {
         $username = $this->input->post('username', TRUE);
         $password = $this->input->post('password', TRUE);
         $name = $this->input->post('name', TRUE);
+        $tel = $this->input->post('tel', TRUE);
 
         if($this->db->insert('users', [
             'username' => $username,
             'password' => password_hash($password, PASSWORD_BCRYPT),
             'name' => $name,
+            'tel' => $tel,
         ])){
             $this->session->set_flashdata('res',[
                 'met'=>'success',
